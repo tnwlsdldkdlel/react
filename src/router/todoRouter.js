@@ -18,7 +18,7 @@ const todoRouter = () => {
             element: <Navigate replace to="list" />
         },
         {
-            path: "read/:tno",
+            path: "read/:seq",
             element: <Suspense fallback={Loading}><TodoRead /></Suspense>
         },
         {
@@ -26,7 +26,7 @@ const todoRouter = () => {
             element: <Suspense fallback={Loading}><TodoAdd /></Suspense>
         },
         {
-            path: "modify/:tno",
+            path: "modify/:seq",
             element: <Suspense fallback={Loading}><TodoModify /></Suspense>
         }
     ]
