@@ -1,16 +1,15 @@
 import React from 'react'
-import ModifyComponent from '../../components/todo/ModifyComponent';
+import ModifyComponent from '../../components/products/ModifyComponent';
 import { useParams } from 'react-router-dom';
 
 function ModifyPage() {
-    const {seq} = useParams();
+    const { seq } = useParams();
 
     return (
         <div className="p-4 w-full bg-white">
             <div className="text-3xl font-extrabold">
-                Todo Modify Page
+                <ModifyComponent seq={seq}></ModifyComponent>
             </div>
-            <ModifyComponent seq={seq} />
         </div>
     );
 

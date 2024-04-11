@@ -28,9 +28,9 @@ function ReadComponents({ seq }) {
     return (
         <div className="border-2 border-sky-200 mt-10 m-2 p-4">
             {makeDiv('Tno', todo.seq)}
-            {makeDiv('Writer', todo.writer)}
             {makeDiv('Title', todo.title)}
-            {makeDiv('Title', todo.complete ? 'Completed' : 'Not Yet')}
+            {makeDiv('Content', todo.content)}
+            {makeDiv('Complete', todo.complete ? 'Completed' : 'Not Yet')}
 
             {/* buttons.........start */}
             <div className="flex justify-end p-4">
