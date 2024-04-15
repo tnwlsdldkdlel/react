@@ -63,7 +63,6 @@ function ModifyComponent({ seq }) {
         setFetching(true);
 
         putOne(formData).then(result => {
-            console.log(result);
             setFetching(false);
         })
 
