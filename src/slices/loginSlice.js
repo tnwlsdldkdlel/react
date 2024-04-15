@@ -1,8 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { loginPost } from "../api/memberApi";
+import { getCookie, removeCookie, setCookies } from "../util/cookieUtil";
 
 const initState = {
     email: ""
+}
+
+const loadMemberCookie = () => {
+    return getCookie("member");
 }
 
 // Redux Toolkit의 비동기 처리 기능
@@ -10,11 +15,11 @@ const initState = {
 // redux-saga 에서만 사용할 수 있던 기능(이미 호출한 API 요청 취소하기 등)도 사용할 수 있다.
 export const loginPostAsync = createAsyncThunk("loginPostAsync", (param) => {
     return loginPost(param);
-})
+});
 
 const loginSlice = createSlice({
     name: 'LoginSlice',
-    initialState: initState,
+    initialState: loadMemberCookie() || initState,
     reducers: {
         // login: (state, action) => {
         //     console.log("login.....")
@@ -23,14 +28,20 @@ const loginSlice = createSlice({
         // },
         logout: (state, action) => {
             console.log("logout....")
+
+            removeCookie("member");
             return { ...initState }
         }
     },
     extraReducers: (builder) => {
         builder.addCase(loginPostAsync.fulfilled, (state, action) => {
             console.log("fulfilled");
-
             const payload = action.payload;
+
+            if (!payload.error) {
+                setCookies("member", JSON.stringify(payload));
+            }
+
             return payload;
         })
             .addCase(loginPostAsync.pending, (state, action) => {
